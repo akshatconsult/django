@@ -9,12 +9,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import pymysql
 
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+pymysql.install_as_MySQLdb()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-8*n!bi3eoudj!**-&c5-sr(k8y!zi6%#(n!+2+()kfw0c(t-tw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://3.15.161.84/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,8 +83,16 @@ WSGI_APPLICATION = 'reports_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',
+        'HOST':'database-1.caqnmp3wb1s0.us-east-2.rds.amazonaws.com',
+        'USER':'admin',
+        'PASSWORD':'adminadmin',
+        'PORT':'3306',
+        'OPTIONS':
+        {
+            'sql_mode':'traditional'
+        }
     }
 }
 
